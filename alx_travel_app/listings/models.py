@@ -55,3 +55,17 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.property.name}: {self.rating}/5"
+
+
+class Payment(models.Model):
+    booking_reference = models.CharField(max_length=100)
+    payment_status = models.CharField(max_length=20, choices=[
+        ('Pending', 'Pending'),
+        ('Completed', 'Completed'),
+        ('Failed', 'Failed')
+    ])
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    transaction_id = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.booking_reference
